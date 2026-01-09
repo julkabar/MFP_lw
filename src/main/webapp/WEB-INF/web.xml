@@ -4,7 +4,7 @@
 
 <web-app>
     <listener>
-        <listener-class>yyb.julkabar.web.AppInit</listener-class>
+        <listener-class>yyb.julkabar.config.AppInit</listener-class>
     </listener>
 
     <servlet>

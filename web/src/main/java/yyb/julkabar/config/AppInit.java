@@ -1,10 +1,8 @@
-package yyb.julkabar.web;
-
-import yyb.julkabar.db.CommentDao;
+package yyb.julkabar.config;
 
 public class AppInit implements jakarta.servlet.ServletContextListener {
     @Override public void contextInitialized(jakarta.servlet.ServletContextEvent e) {
-        try { new CommentDao().init(); }
-        catch (Exception ex) { throw new RuntimeException(ex); }
+        Beans.init();
+        System.out.print("\nApp started at: http://localhost:8080/books\n");
     }
 }

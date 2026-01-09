@@ -11,10 +11,10 @@
 
 ```bash
 # Компіляція проєкту
-mvn clean compile
+mvn clean install
 
 # Запуск Jetty
-mvn jetty:run
+mvn - pl web jetty:run
 
 # Зупнка серверу
 Ctrl + C
@@ -33,6 +33,11 @@ Ctrl + C
 
 ## Ендпоїнти
 
+GET     —   /books   — повертає JSON-масив всіх книг.
+
+POST    —   /books   — додає нову книгу із вказаними назвою, автором та роком публікації.
+
 GET     —   /comments   — повертає JSON-масив всіх коментарів.
 
-POST    —   /comments   — додає новий коментар із вказаних author (≤64), text (≤1000).
+POST    —   /comments   — додає новий коментар із вказаними автором та змістом.
+
