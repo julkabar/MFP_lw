@@ -9,7 +9,7 @@
 
     <servlet>
         <servlet-name>comments</servlet-name>
-        <servlet-class>yyb.julkabar.web.CommentsServlet</servlet-class>
+        <servlet-class>yyb.julkabar.web.CommentsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>comments</servlet-name>
