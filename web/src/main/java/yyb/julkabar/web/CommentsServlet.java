@@ -4,7 +4,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import yyb.julkabar.config.Beans;
 import yyb.julkabar.core.domain.Book;
 import yyb.julkabar.core.domain.Comment;
 import yyb.julkabar.core.domain.PageRequest;
@@ -16,8 +15,13 @@ import java.util.List;
 
 public class CommentsServlet extends HttpServlet {
 
-    private final CatalogRepositoryPort bookRepo = Beans.getBookRepo();
-    private final CommentRepositoryPort commentRepo = Beans.getCommentRepo();
+    private final CatalogRepositoryPort bookRepo;
+    private final CommentRepositoryPort commentRepo;
+
+    public CommentsServlet(CatalogRepositoryPort bookRepo, CommentRepositoryPort commentRepo) {
+        this.bookRepo = bookRepo;
+        this.commentRepo = commentRepo;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,21 +35,16 @@ public class CommentsServlet extends HttpServlet {
 
         long bookId = Long.parseLong(bookIdStr);
 
-        try {
-            Book book = bookRepo.findById(bookId);
+        Book book = bookRepo.findById(bookId);
 
+        PageRequest pageRequest = new PageRequest(0, 20);
+        List<Comment> comments = commentRepo
+                .list(bookId, null, null, pageRequest)
+                .getItems();
 
-            PageRequest pageRequest = new PageRequest(0, 20);
-            List<Comment> comments = commentRepo
-                    .list(bookId, null, null, pageRequest)
-                    .getItems();
-
-            req.setAttribute("book", book);
-            req.setAttribute("comments", comments);
-            req.getRequestDispatcher("/WEB-INF/views/book-comments.jsp").forward(req, resp);
-        } catch (Exception e) {
-            throw new ServletException("Cannot load book details", e);
-        }
+        req.setAttribute("book", book);
+        req.setAttribute("comments", comments);
+        req.getRequestDispatcher("/WEB-INF/views/book-comments.jsp").forward(req, resp);
     }
 
     @Override

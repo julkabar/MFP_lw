@@ -6,7 +6,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import yyb.julkabar.config.Beans;
 import yyb.julkabar.core.domain.Book;
 import yyb.julkabar.core.domain.PageRequest;
 import yyb.julkabar.core.port.CatalogRepositoryPort;
@@ -17,8 +16,13 @@ public class BooksApiServlet extends HttpServlet {
 
     private static final Logger log = LoggerFactory.getLogger(BooksApiServlet.class);
 
-    private final CatalogRepositoryPort bookRepo = Beans.getBookRepo();
-    private final ObjectMapper om = new ObjectMapper();
+    private final CatalogRepositoryPort bookRepo;
+    private final ObjectMapper om;
+
+    public BooksApiServlet(CatalogRepositoryPort bookRepo, ObjectMapper objectMapper) {
+        this.bookRepo = bookRepo;
+        this.om = objectMapper;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
