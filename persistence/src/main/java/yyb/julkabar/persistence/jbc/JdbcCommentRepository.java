@@ -2,7 +2,7 @@ package yyb.julkabar.persistence.jbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Repository;
 import yyb.julkabar.core.domain.Comment;
 import yyb.julkabar.core.domain.Page;
 import yyb.julkabar.core.domain.PageRequest;
@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 
-@Repository
+//@Repository
 public class JdbcCommentRepository implements CommentRepositoryPort {
 
     private static final Logger log = LoggerFactory.getLogger(JdbcCommentRepository.class);

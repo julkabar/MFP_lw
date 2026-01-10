@@ -2,7 +2,7 @@ package yyb.julkabar.persistence.jbc;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
+//import org.springframework.stereotype.Repository;
 import yyb.julkabar.core.domain.Book;
 import yyb.julkabar.core.domain.Page;
 import yyb.julkabar.core.domain.PageRequest;
@@ -11,7 +11,7 @@ import yyb.julkabar.core.port.CatalogRepositoryPort;
 import java.sql.*;
 import java.util.ArrayList;
 
-@Repository
+//@Repository
 public class JdbcBookRepository implements CatalogRepositoryPort {
 
     private static final Logger log = LoggerFactory.getLogger(JdbcBookRepository.class);
