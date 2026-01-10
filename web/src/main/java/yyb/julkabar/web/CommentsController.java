@@ -14,18 +14,23 @@ import java.util.List;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    private final CatalogRepositoryPort bookRepo;
     private final CommentRepositoryPort commentRepo;
+    private final CatalogRepositoryPort bookRepo;
 
-    public CommentsController(CatalogRepositoryPort bookRepo, CommentRepositoryPort commentRepo) {
-        this.bookRepo = bookRepo;
+    public CommentsController(CommentRepositoryPort commentRepo,
+                              CatalogRepositoryPort bookRepo) {
         this.commentRepo = commentRepo;
+        this.bookRepo = bookRepo;
     }
 
     @GetMapping
     public String list(@RequestParam long bookId, Model model) {
         var book = bookRepo.findById(bookId);
-        List<Comment> comments = commentRepo.list(bookId, null, null, new PageRequest(0, 20)).getItems();
+        if (book == null) return "redirect:/books";
+
+        var comments = commentRepo
+                .list(bookId, null, null, new PageRequest(0, 20))
+                .getItems();
 
         model.addAttribute("book", book);
         model.addAttribute("comments", comments);
@@ -36,10 +41,7 @@ public class CommentsController {
     public String add(@RequestParam long bookId,
                       @RequestParam String author,
                       @RequestParam String text) {
-        if (!author.isBlank() && !text.isBlank()) {
-            commentRepo.add(bookId, author.trim(), text.trim());
-        }
-
+        commentRepo.add(bookId, author.trim(), text.trim());
         return "redirect:/comments?bookId=" + bookId;
     }
 

@@ -9,5 +9,9 @@
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/web/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/src/main/resources/application.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/src/main/resources/messages_en.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/src/main/resources/messages_fr.properties" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/web/src/main/resources/messages_uk.properties" charset="UTF-8" />
   </component>
 </project>

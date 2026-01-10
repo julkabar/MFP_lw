@@ -24,36 +24,12 @@ public class BooksController {
     public String getAllBooks(Model model) {
         List<Book> books = bookRepo.search(null, new PageRequest(0, 20)).getItems();
         model.addAttribute("books", books);
-        return "books";
+        return "books";   // Thymeleaf template
     }
 
-    @GetMapping("books/{id}")
-    public String getBook(@PathVariable long id, Model model) {
-        Book book = bookRepo.findById(id);
-        model.addAttribute("book", book);
-        return "book-comments";
-    }
 
-    @PostMapping
-    public String addBook(
-            @RequestParam String title,
-            @RequestParam String author,
-            @RequestParam int pubYear,
-            RedirectAttributes redirectAttributes
-    ) {
-        if (title == null || title.isBlank() ||
-                author == null || author.isBlank() ||
-                pubYear <= 0 || pubYear > 9999) {
-            redirectAttributes.addFlashAttribute("error", "title & author & pubYear required");
-            return "redirect:/books";
-        }
-
-        try {
-            bookRepo.add(title, author, pubYear);
-            return "redirect:/books";
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "Cannot add book: " + e.getMessage());
-            return "redirect:/books";
-        }
+    @GetMapping("/{id}")
+    public String getBookById(@PathVariable long id) {
+        return "redirect:/comments?bookId=" + id;
     }
 }
