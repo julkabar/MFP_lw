@@ -12,10 +12,11 @@ import yyb.julkabar.core.port.CatalogRepositoryPort;
 @Controller
 @RequestMapping("/books")
 public class BookFormController {
-
     private final CatalogRepositoryPort bookRepo;
+    private final MailService mailService;
 
-    public BookFormController(CatalogRepositoryPort bookRepo) {
+    public BookFormController(CatalogRepositoryPort bookRepo, MailService mailService) {
+        this.mailService = mailService;
         this.bookRepo = bookRepo;
     }
 
@@ -31,6 +32,7 @@ public class BookFormController {
         if (book.getTitle() != null && !book.getTitle().isBlank()) {
             bookRepo.add(book.getTitle(), book.getAuthor(), book.getPubYear());
         }
+        mailService.sendNewBookEmail(book);
 
         return "redirect:/books";
     }
