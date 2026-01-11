@@ -28,8 +28,8 @@
 
         <p>
             <span th:text="#{user.comments.book}">до книги</span>:
-            <a th:href="@{/books/{id}(id=${c.bookId})}">
-                Book #<span th:text="${c.bookId}">1</span>
+            <a th:href="@{/books/{id}(id=${c.book.id})}">
+                <span th:text="${c.book.title}">Назва книги</span>
             </a>
         </p>
 
