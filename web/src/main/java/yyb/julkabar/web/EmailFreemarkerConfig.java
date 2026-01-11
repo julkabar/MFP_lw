@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 @org.springframework.context.annotation.Configuration
 public class EmailFreemarkerConfig {
 
-    @Bean(name = "emailFreemarkerConfiguration")
+    @Bean
     public Configuration emailFreemarkerConfiguration() {
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_32);
