@@ -3,6 +3,7 @@ package yyb.julkabar.web;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import yyb.julkabar.core.domain.Book;
 import yyb.julkabar.core.domain.Comment;
 import yyb.julkabar.core.domain.PageRequest;
 import yyb.julkabar.core.port.CatalogRepositoryPort;
@@ -38,11 +39,11 @@ public class CommentsController {
     }
 
     @PostMapping
-    public String add(@RequestParam long bookId,
+    public String add(@RequestParam Book book,
                       @RequestParam String author,
                       @RequestParam String text) {
-        commentRepo.add(bookId, author.trim(), text.trim());
-        return "redirect:/comments?bookId=" + bookId;
+        commentRepo.add(book, author.trim(), text.trim());
+        return "redirect:/comments?bookId=" + book.getId();
     }
 
     @PostMapping("/delete")
